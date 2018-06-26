@@ -5,7 +5,7 @@
     <entry>
       <title>Hello World</title>
       <link href="/2018/06/26/World/"/>
-      <content type="html"><![CDATA[<blockquote><p>Hello World!</p></blockquote>]]></content>
+      <content type="html"><![CDATA[<blockquote><p>Hello World!  </p></blockquote><a id="more"></a>]]></content>
       
       
     </entry>
