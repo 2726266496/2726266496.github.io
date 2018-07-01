@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  
+  
+  <title>  Pacman与yaourt常用命令记录 |   黑马好尴尬 </title>
+
+ 
+  
+    <link rel="icon" href="/images/favicon.png">
+  
+
+
+  <link rel="stylesheet" href="/nayo.min.css"> 
+</head>  
+  <body>   
+    
+      <header class="header">
+	
+  <nav class="header-nav">        
+   
+    <span class="iconfont icon-menu mobile-toggle"></span>   	
+
+    <!-- <a class="header-logo" href="/"></a> -->
+
+    <div class="header-menu">          
+              
+            
+
+              <a class="header-menu-link" id="header-menu-home" href="/">首页</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于</a>     
+
+            
+            
+            
+
+              <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+
+            
+                
+    </div>  
+    
+  </nav>
+</header>   
+
+      <div class="container">       
+          
+          
+            <section class="main">  
+          
+
+          <article class="post">
+  
+	<div class="post-header">
+
+	<p class="post-title">	
+		pacman与yaourt常用命令记录
+	</p>
+			
+
+	<div class="meta-info">	
+	<span>
+		7月 01, 2018
+	</span>
+
+	
+	
+		<i class="iconfont icon-words"></i>
+		<span>
+			1038
+		</span>
+	
+</div>
+
+</div> 
+	 
+
+	  <div class="post-content slideDownMin">
+
+		
+
+			
+					<blockquote>
+<p>Manjaro是一款基于Arch Linux、对用户友好的Linux发行版。在Linux社区，Arch Linux的确是一个异常快速、强大、轻量级的发行版，它提供最新的、最全的软件。  </p>
+</blockquote>
+<p>Manjaro官方提供了XFCE、KDE、GNOME三种DE版本，同时还有<a href="https://manjaro.org/category/community-editions/deepin/" target="_blank" rel="noopener">Deepin的桌面移植版本</a>,本着人丑还颜控的精神体验了一下KDE版本，记录下pacman和yaourt两个包管理器的简单常用的命令。   </p>
+<a id="more"></a>
+<p>进入系统的第一件事是要更新系统，通常会出现一些小问题，解决方法参见<a href="https://wiki.manjaro.org/index.php?title=Pacman_troubleshooting" target="_blank" rel="noopener">官方WIKI</a>  </p>
+<h3 id="pacman"><a href="#pacman" class="headerlink" title="pacman"></a>pacman</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#系统更新 </span></span><br><span class="line">pacman -Syu <span class="comment">#对整个系统进行更新</span></span><br><span class="line">pacman -Sy <span class="comment">#将本地的包数据库与远程的仓库进行了同步</span></span><br><span class="line">pacman -Su <span class="comment">#不同步数据库直接进行更新</span></span><br><span class="line"><span class="comment">#安装包 </span></span><br><span class="line">pacman -S 包名 <span class="comment">#例如，执行 pacman -S firefox 将安装 Firefox。你也可以同时安装多个包，只需以空格分隔包名即可。</span></span><br><span class="line">pacman -Sy 包名 <span class="comment">#与上面命令不同的是，该命令将在同步包数据库后再执行安装。</span></span><br><span class="line">pacman -Sv 包名 <span class="comment">#在显示一些操作信息后执行安装。 </span></span><br><span class="line">pacman -U <span class="comment">#安装本地包，其扩展名为 pkg.tar.gz。</span></span><br><span class="line"><span class="comment">#删除包</span></span><br><span class="line">pacman -R 包名 <span class="comment">#该命令将只删除包，不包含该包的依赖。</span></span><br><span class="line">pacman -Rs 包名 <span class="comment">#在删除包的同时，也将删除其依赖。</span></span><br><span class="line">pacman -Rd 包名 <span class="comment">#在删除包时不检查依赖。</span></span><br><span class="line"><span class="comment">#搜索包</span></span><br><span class="line">pacman -Ss 关键字 <span class="comment">#这将搜索含关键字的包。</span></span><br><span class="line">pacman -Qi 包名 <span class="comment">#查看有关包的信息。</span></span><br><span class="line">pacman -Ql 包名 <span class="comment">#列出该包的文件。</span></span><br><span class="line"><span class="comment">#其他用法</span></span><br><span class="line">pacman -Sw 包名 <span class="comment">#只下载包，不安装。</span></span><br><span class="line">pacman -Sc Pacman <span class="comment">#下载的包文件位于 /var/cache/pacman/pkg/ 目录。该命令将清理未安装的包文件。</span></span><br><span class="line">pacman -Scc <span class="comment">#清理所有的缓存文件。</span></span><br></pre></td></tr></table></figure>
+<h3 id="yaourt"><a href="#yaourt" class="headerlink" title="yaourt"></a>yaourt</h3><p>yaourt官方并未集成，需要使用pacman安装，<code>pacman -S yaourt</code>，用法与pacman类似。  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">yaourt -S 包名 <span class="comment">#从AUR安装包</span></span><br><span class="line">yaourt -Ss 关键字 <span class="comment">#使用关键字搜索包</span></span><br><span class="line">yaourt -Syu -aur <span class="comment">#从AUR升级本地源数据库并安装更新</span></span><br><span class="line">yaourt -Si 包名 <span class="comment">#列出包信息</span></span><br><span class="line">yaourt -Sc <span class="comment">#从缓存中清楚旧的包</span></span><br><span class="line">yaourt -Su <span class="comment">#安装AUR中的更新包</span></span><br><span class="line">yaourt -Sy <span class="comment">#获取最新的AUR包数据库</span></span><br><span class="line">yaourt -Cd <span class="comment">#清楚AUR包数据库</span></span><br><span class="line">yaourt -R 包名 <span class="comment">#删除软件包</span></span><br></pre></td></tr></table></figure>
+  	
+					
+	  </div>     
+	  
+
+	
+<div class="post-meta">
+      	
+
+      
+        <i class="iconfont icon-tag"></i>     
+          <a class="tag-link" href="/tags/Arch/">Arch</a> <a class="tag-link" href="/tags/Linux/">Linux</a> <a class="tag-link" href="/tags/Manjaro/">Manjaro</a>    
+      	
+</div>
+
+
+
+
+
+<div class="post-footer">
+  <div class="pf-left">
+      <img class="pf-avatar" src="/images/header.png">
+      <p class="pf-des">“黑马”</p>
+  </div>
+
+  <div class="pf-right">           
+      <div class="pf-links">
+         
+        
+	
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+	
+	<span class="share-btn">
+	<span class="iconfont icon-share"></span>
+	</span>
+
+
+	<div class="-mob-share sildeUpMin">
+		   			             
+            <a class="iconfont  icon-share-qq -mob-share-qq"></a>		
+     	   			             
+            <a class="iconfont  icon-share-weixin -mob-share-weixin"></a>		
+     	   			             
+            <a class="iconfont  icon-share-weibo -mob-share-weibo"></a>		
+     	   			             
+            <a class="iconfont  icon-share-facebook -mob-share-facebook"></a>		
+     	   			             
+            <a class="iconfont  icon-share-twitter -mob-share-twitter"></a>		
+     	   			             
+            <a class="iconfont  icon-share-google -mob-share-google"></a>		
+     	   
+	</div>	
+
+      </div>  
+    <nav class="pf-paginator">
+           
+        
+      
+        
+        <a href="/2018/06/29/PHP基础知识思维导图/" data-hover="PHP基础知识思维导图"> 下一篇</a>
+            
+  </nav>   
+  </div>
+</div> 
+	
+
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zNzYxNS8xNDE0Ng==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+	
+</article>
+
+          </section> 
+      </div>            
+    
+    <a id="backTop">
+      <span>
+        <i class="iconfont icon-backtotop"></i>
+      </span>
+    </a> 
+
+  
+    
+
+        
+        <div class="search-container sildeUpMin">
+
+
+            <div class="search-header">
+            <input type="text" placeholder="输入你想搜索的" id="search-input" class="search-input">  
+            <span class="search-cancel iconfont icon-cancel"></span>
+          
+            </div>
+              
+            <div id="search-result" class="search-result"></div>
+
+        </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+      <img class="mobile-menu-icon" src="/images/favicon.png">   
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+      
+</div>        
+    
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?1b3d078be464078c7b8a17ee186f9f82"; 
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+     
+    
+
+
+
+
+<footer id="footer">	    
+
+		
+		<div class="footer-copyright">
+		&copy;
+		
+		2018		
+	
+		“黑马”
+		<br>
+		Powered By
+		<a href="https://hexo.io" target="_blank">Hexo</a>
+		| Theme By
+		<a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a>	
+		| Hosted By
+		<a href="https://github.io" target="_blank">GitHub Page</a>
+		</div>			
+	 
+</footer>   
+
+  
+
+    <script src="/nayo.bundle.js"></script>           
+  </body>        
+</html>
