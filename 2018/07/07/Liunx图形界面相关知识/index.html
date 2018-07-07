@@ -1,0 +1,362 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  
+  
+  <title>  Liunx图形界面相关知识 |   黑马好尴尬 </title>
+
+ 
+  
+    <link rel="icon" href="/images/favicon.png">
+  
+
+
+  <link rel="stylesheet" href="/nayo.min.css"> 
+</head>  
+  <body>   
+    
+      <header class="header">
+	
+  <nav class="header-nav">        
+   
+    <span class="iconfont icon-menu mobile-toggle"></span>   	
+
+    <!-- <a class="header-logo" href="/"></a> -->
+
+    <div class="header-menu">          
+              
+            
+
+              <a class="header-menu-link" id="header-menu-home" href="/">首页</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于</a>     
+
+            
+            
+            
+
+              <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+
+            
+                
+    </div>  
+    
+  </nav>
+</header>   
+
+      <div class="container">       
+          
+          
+            <section class="main">  
+          
+
+          <article class="post">
+  
+	<div class="post-header">
+
+	<p class="post-title">	
+		Liunx图形界面相关知识
+	</p>
+			
+
+	<div class="meta-info">	
+	<span>
+		7月 07, 2018
+	</span>
+
+	
+	
+		<i class="iconfont icon-words"></i>
+		<span>
+			1337
+		</span>
+	
+</div>
+
+</div> 
+	 
+
+	  <div class="post-content slideDownMin">
+
+		
+
+			
+					<p>一直对于Linux桌面发行版使用的各种桌面环境，窗口管理器等相关概念不太了解，趁着最近折腾Manjaro,把相关的知识学习梳理一下<br><a id="more"></a></p>
+<h2 id="Linux图形界面"><a href="#Linux图形界面" class="headerlink" title="Linux图形界面"></a>Linux图形界面</h2><p><strong>linux图形界面的实现只是linux下的应用程序实现</strong>，图形界面（GUI）并不是linux的一部分</p>
+<h2 id="Linux图形界面的实现"><a href="#Linux图形界面的实现" class="headerlink" title="Linux图形界面的实现"></a>Linux图形界面的实现</h2><ul>
+<li><p>Linux图形界面是由实现了X协议的具体软件来实现的，具体软件有：XFree86、XORG、Xnest、MOTIF(商业上常用)。  </p>
+<ul>
+<li>关于X协议：</li>
+</ul>
+<ol>
+<li><p>作为协议是与平台无关的，不是具体实现的软件  </p>
+</li>
+<li><p>X协议主要有<em>X客户端</em>和<em>X服务器</em>组成</p>
+<blockquote>
+<p>如：我需要划个圆，X应用程序告诉X服务器在屏幕的什么地方用什么颜色画一个多大的圆，而具体的”画”的动作，比如这个圆如何生成，用什么显卡的驱动程序去指挥显卡完成等等工作是由X服务器来完成的   </p>
+</blockquote>
+</li>
+<li><p>X协议的服务器和客户端程序通常在同一台电脑上  </p>
+</li>
+<li><p>X、X11、X11R6的关系 </p>
+<blockquote>
+<p>不知道初学者有没有注意到/usr/X11R6这个目录，这是XFree的默认安装目录<br>X11R6实际上是XProtocol version 11 Release6(X协议第11版第六次发行)的意思，就是说目前用的X协议是第11版的，然后经过了6次小的修正。不同版本的X协议是不能通信的，就象我们现在IPV4和IPV6不能通信一样，不过不用担心，现在的X服务器软件和X应用程序都遵循X11R6.<br>另外XFree86 3.3.6、XFree86 4.3.6等这些版本是实现X协议的软件XFree86的版本号.这是初学者经常高混淆的概念.</p>
+</blockquote>
+</li>
+<li><p>X协议客户端实现</p>
+<blockquote>
+<p>XFree86是X协议的服务器软件(注以软件的形式实现)，但Client端更多的是方便程序员更方便的使用X协议与服务器端的XFree86交互，故就产生了一个Xlib库，封装了X协议内容，如果你还觉得直接使用Xlib不方便，于是就产生了QT和GTK，对Xlib进一步封装，提供了很多控件，可以可视化的使用X协议更方便程序员的开发。</p>
+<img src="/2018/07/07/Liunx图形界面相关知识/xapp.jpg" title="[Xlib、QT、GTK直接关系]"> 
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="Linux桌面环境"><a href="#Linux桌面环境" class="headerlink" title="Linux桌面环境"></a>Linux桌面环境</h2><ul>
+<li><p><a href="https://wiki.archlinux.org/index.php/Desktop_environment" target="_blank" rel="noopener">桌面环境(DE)</a></p>
+<blockquote>
+<p>泛指桌面的背景图片，桌面的应用程序软件，桌面的快捷方式，桌面的DIY小部件等组成的一个直观的视觉环境。<strong>桌面环境可能仅仅是一个简单的窗口管理器。</strong> 四大主流DE(并不只是窗口管理器，同时提供了桌面、菜单等等):KDE、Gnome、Xfce、LXDE</p>
+<img src="/2018/07/07/Liunx图形界面相关知识/kde.jpg" title="[kde与qt]"> 
+<img src="/2018/07/07/Liunx图形界面相关知识/gnome.jpg" title="[gnome与gtk]"> 
+</blockquote>
+</li>
+<li><p><a href="https://wiki.archlinux.org/index.php/Window_manager" target="_blank" rel="noopener">窗口管理器(WM)</a></p>
+<blockquote>
+<p>窗口管理器的作用就是实现窗口的最大化、最小化、移动、关闭等，而这些不是X服务器来负责完成的。如果不窗口管理器，X应用程序仍可以启动，但它就在屏幕中间，不能移动、不能最小化、不能最大化、没有边框。</p>
+</blockquote>
+</li>
+<li><p><a href="https://wiki.archlinux.org/index.php/Display_manager" target="_blank" rel="noopener">显示管理器(DM)</a></p>
+<blockquote>
+<p>显示管理器或登录管理器是一个在启动最后显示的图形界面。和窗口管理器一样，显示管理器有很多种。通常每个显示管理器都能进行一些定制。</p>
+</blockquote>
+</li>
+</ul>
+<img src="/2018/07/07/Liunx图形界面相关知识/xclient.jpg" title="[实现图解]"> 
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>Linux的图形界面只是应用程序，不同于现代的Windows，内建于内核中。  </p>
+</li>
+<li><p>Linux通过X服务器和X客户端实现图形界面，而X客户端通常是DE、WM、DM等组成实现。 </p>
+</li>
+<li><p>DE可以包含WM、DM等，有的WM可以单独作为DE使用,比如i3wm?  </p>
+</li>
+<li><p>QT、GTK等是实现DE(KDE、Gnome)、WM等的类库。</p>
+</li>
+</ol>
+  	
+					
+	  </div>     
+	  
+
+	
+<div class="post-meta">
+      	
+
+      
+        <i class="iconfont icon-tag"></i>     
+          <a class="tag-link" href="/tags/GTK/">GTK</a> <a class="tag-link" href="/tags/Gnome/">Gnome</a> <a class="tag-link" href="/tags/KDE/">KDE</a> <a class="tag-link" href="/tags/Linux/">Linux</a> <a class="tag-link" href="/tags/QT/">QT</a> <a class="tag-link" href="/tags/X-Window/">X Window</a>    
+      	
+</div>
+
+
+
+
+
+<div class="post-footer">
+  <div class="pf-left">
+      <img class="pf-avatar" src="/images/header.png">
+      <p class="pf-des">“黑马”</p>
+  </div>
+
+  <div class="pf-right">           
+      <div class="pf-links">
+         
+        
+	
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+	
+	<span class="share-btn">
+	<span class="iconfont icon-share"></span>
+	</span>
+
+
+	<div class="-mob-share sildeUpMin">
+		   			             
+            <a class="iconfont  icon-share-qq -mob-share-qq"></a>		
+     	   			             
+            <a class="iconfont  icon-share-weixin -mob-share-weixin"></a>		
+     	   			             
+            <a class="iconfont  icon-share-weibo -mob-share-weibo"></a>		
+     	   			             
+            <a class="iconfont  icon-share-facebook -mob-share-facebook"></a>		
+     	   			             
+            <a class="iconfont  icon-share-twitter -mob-share-twitter"></a>		
+     	   			             
+            <a class="iconfont  icon-share-google -mob-share-google"></a>		
+     	   
+	</div>	
+
+      </div>  
+    <nav class="pf-paginator">
+           
+        
+      
+        
+        <a href="/2018/07/01/pacman与yaourt常用命令记录/" data-hover="pacman与yaourt常用命令记录"> 下一篇</a>
+            
+  </nav>   
+  </div>
+</div> 
+	
+
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zNzYxNS8xNDE0Ng==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+	
+</article>
+
+          </section> 
+      </div>            
+    
+    <a id="backTop">
+      <span>
+        <i class="iconfont icon-backtotop"></i>
+      </span>
+    </a> 
+
+  
+    
+
+        
+        <div class="search-container sildeUpMin">
+
+
+            <div class="search-header">
+            <input type="text" placeholder="输入你想搜索的" id="search-input" class="search-input">  
+            <span class="search-cancel iconfont icon-cancel"></span>
+          
+            </div>
+              
+            <div id="search-result" class="search-result"></div>
+
+        </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+      <img class="mobile-menu-icon lazyload" src="/images/placeholder.png" data-src="/images/favicon.png">   
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+      
+</div>        
+    
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?1b3d078be464078c7b8a17ee186f9f82"; 
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+     
+    
+
+
+
+
+<footer id="footer">	    
+
+		
+		<div class="footer-copyright">
+		&copy;
+		
+		2018		
+	
+		“黑马”
+		<br>
+		Powered By
+		<a href="https://hexo.io" target="_blank">Hexo</a>
+		| Theme By
+		<a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a>	
+		| Hosted By
+		<a href="https://github.io" target="_blank">GitHub Page</a>
+		</div>			
+	 
+</footer>   
+
+  
+
+    <script src="/nayo.bundle.js"></script>           
+  </body>        
+</html>
