@@ -73,8 +73,15 @@
 			$("#code").typewriter();
 		}
 	</script>
-	<audio autoplay="autoplay">
+	<audio id="audio" autoplay="autoplay" >
 		<source src="rising-road.mp3" type="audio/mpeg" />
 	</audio>
+	<script>
+		$(function(){
+
+			$("#audio")[0].play();
+
+			})
+	</script>
 </body>
 </html>
