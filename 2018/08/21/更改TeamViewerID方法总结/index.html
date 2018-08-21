@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  
+  
+  <title>  更改TeamViewerID方法总结 |   黑马好尴尬 </title>
+
+ 
+  
+    <link rel="icon" href="/images/favicon.png">
+  
+
+
+  <link rel="stylesheet" href="/nayo.min.css"> 
+</head>  
+  <body>   
+    
+      <header class="header">
+	
+  <nav class="header-nav">        
+   
+    <span class="iconfont icon-menu mobile-toggle"></span>   	
+
+    <!-- <a class="header-logo" href="/"></a> -->
+
+    <div class="header-menu">          
+              
+            
+
+              <a class="header-menu-link" id="header-menu-home" href="/">首页</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于</a>     
+
+            
+            
+            
+
+              <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+
+            
+                
+    </div>  
+    
+  </nav>
+</header>   
+
+      <div class="container">       
+          
+          
+            <section class="main">  
+          
+
+          <article class="post">
+  
+	<div class="post-header">
+
+	<p class="post-title">	
+		更改TeamViewerID方法总结
+	</p>
+			
+
+	<div class="meta-info">	
+	<span>
+		8月 21, 2018
+	</span>
+
+	
+	
+		<i class="iconfont icon-words"></i>
+		<span>
+			1129
+		</span>
+	
+</div>
+
+</div> 
+	 
+
+	  <div class="post-content slideDownMin">
+
+		
+
+			
+					<p>TeamViewer是一款使用体验极佳的远程协助，远程会议工具，对个人用户免费，商业许可比较昂贵，即使个人用户在使用多次后或连接时间过久后，都可能会出现连接限制，断线等问题，针对此问题，总结更改其ID的方法，以突破限制,商业用户请支持正版。<br><a id="more"></a><br>TeamViewer ID基于计算机的多个独特参数生成：  </p>
+<ol>
+<li>网卡的MAC地址  </li>
+<li>磁盘分区的VolumeID  </li>
+<li>文件夹Program Files的创建日期 </li>
+</ol>
+<p>因此，要更改TeamViewer ID，需要更改这3个值。</p>
+<h2 id="Windows平台更改TeamViewer-ID"><a href="#Windows平台更改TeamViewer-ID" class="headerlink" title="Windows平台更改TeamViewer ID"></a>Windows平台更改TeamViewer ID</h2><ol>
+<li><p>终止TeamViewer进程，从注册表中删除当前的TeamViewer ID  </p>
+<ul>
+<li>32位系统，找到 HKLM\SOFTWARE\TeamViewer\Version[X]，删除ClientID  </li>
+<li>64位系统，找到 HKLM\SOFTWARE\Wow6432Node\TeamViewer\Version[X]，删除ClientID  </li>
+<li>检查注册表项HKEY_CURRENT_USER\Software\TeamViewer是否存在并将其删除</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li><p>更改文件夹Program Files创建日期，可以使用<a href="http://www.nirsoft.net/utils/nircmd.html" target="_blank" rel="noopener">NirCMD</a>工具，执行以下命令</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nircmdc.exe setfilefoldertime "C:\Program Files" now now</span><br></pre></td></tr></table></figure>
+ <img src="/2018/08/21/更改TeamViewerID方法总结/nircmdcexe.jpg" title="[nircmd]"></li>
+<li><p>更改网卡MAC地址，可以通过各种MAC修改小工具更改MAC地址，例如Win7 MAC Address changer或手动通过注册表、网络适配器设置等更改，不具体叙述  </p>
+</li>
+<li><p>更改VolumeID，通过命令行工具<a href="https://docs.microsoft.com/zh-cn/sysinternals/downloads/volumeid" target="_blank" rel="noopener">VolumeID v2.1</a>实现更改,方法如下  </p>
+<ul>
+<li>命令行执行 <code>vol</code>查看当前VolumeID <img src="/2018/08/21/更改TeamViewerID方法总结/cmd_vol.jpg" title="[vol]"> </li>
+<li>执行<code>Volumeid.exe c: 5E37-EC11</code>更改VolumeID<img src="/2018/08/21/更改TeamViewerID方法总结/cmd_volume_id.jpg" title="[volume_id]"></li>
+</ul>
+</li>
+<li>重新启动计算机，打开TeamViewer获得新的ID  </li>
+</ol>
+<h2 id="Linux平台更改TeamViewer-ID"><a href="#Linux平台更改TeamViewer-ID" class="headerlink" title="Linux平台更改TeamViewer ID"></a>Linux平台更改TeamViewer ID</h2><ol>
+<li>使用su权限卸载Teamviewer  </li>
+<li>删除文件/var/lib/dbus/machine-id（如果存在）</li>
+<li>编辑GUID（你可以只替换最后一个字符）：mc -e id.txt  </li>
+<li><p>更改网卡的MAC地址,命令如下  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth0 down</span><br><span class="line"></span><br><span class="line">ifconfig eth0 hw ether New_MAC_HERE</span><br><span class="line"></span><br><span class="line">ifconfig eth0 up</span><br><span class="line"></span><br><span class="line">nano /etc/network/interfaces</span><br><span class="line"></span><br><span class="line">pre-up ifconfig eth0 hw ether New_MAC_HERE</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启计算机，安装Teamviewer获得新的ID  </p>
+</li>
+</ol>
+<h2 id="Mac-OS平台更改TeamViewer-ID"><a href="#Mac-OS平台更改TeamViewer-ID" class="headerlink" title="Mac OS平台更改TeamViewer ID"></a>Mac OS平台更改TeamViewer ID</h2><p>直接执行Python脚本,重启即可，<a href="https://gist.github.com/zhovner/b1d72f3465c46e7b58a4ea42d625c3e8" target="_blank" rel="noopener">TeamViewer-id-changer.py</a>  </p>
+  	
+					
+	  </div>     
+	  
+
+	
+<div class="post-meta">
+      	
+
+      
+        <i class="iconfont icon-tag"></i>     
+          <a class="tag-link" href="/tags/TeamViewer/">TeamViewer</a> <a class="tag-link" href="/tags/远程协助/">远程协助</a> <a class="tag-link" href="/tags/远程工具/">远程工具</a>    
+      	
+</div>
+
+
+
+
+
+<div class="post-footer">
+  <div class="pf-left">
+      <img class="pf-avatar" src="/images/header.png">
+      <p class="pf-des">“黑马”</p>
+  </div>
+
+  <div class="pf-right">           
+      <div class="pf-links">
+         
+        
+	
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+	
+	<span class="share-btn">
+	<span class="iconfont icon-share"></span>
+	</span>
+
+
+	<div class="-mob-share sildeUpMin">
+		   			             
+            <a class="iconfont  icon-share-qq -mob-share-qq"></a>		
+     	   			             
+            <a class="iconfont  icon-share-weixin -mob-share-weixin"></a>		
+     	   			             
+            <a class="iconfont  icon-share-weibo -mob-share-weibo"></a>		
+     	   			             
+            <a class="iconfont  icon-share-facebook -mob-share-facebook"></a>		
+     	   			             
+            <a class="iconfont  icon-share-twitter -mob-share-twitter"></a>		
+     	   			             
+            <a class="iconfont  icon-share-google -mob-share-google"></a>		
+     	   
+	</div>	
+
+      </div>  
+    <nav class="pf-paginator">
+           
+        
+      
+        
+        <a href="/2018/07/23/台式机散热系统详解/" data-hover="台式机散热系统详解"> 下一篇</a>
+            
+  </nav>   
+  </div>
+</div> 
+	
+
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zNzYxNS8xNDE0Ng==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+	
+</article>
+
+          </section> 
+      </div>            
+    
+    <a id="backTop">
+      <span>
+        <i class="iconfont icon-backtotop"></i>
+      </span>
+    </a> 
+
+  
+    
+
+        
+        <div class="search-container sildeUpMin">
+
+
+            <div class="search-header">
+            <input type="text" placeholder="输入你想搜索的" id="search-input" class="search-input">  
+            <span class="search-cancel iconfont icon-cancel"></span>
+          
+            </div>
+              
+            <div id="search-result" class="search-result"></div>
+
+        </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+      <img class="mobile-menu-icon" src="/images/favicon.png">   
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+      
+</div>        
+    
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?1b3d078be464078c7b8a17ee186f9f82"; 
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+     
+    
+
+
+
+
+<footer id="footer">	    
+
+		
+		<div class="footer-copyright">
+		&copy;
+		
+		2018		
+	
+		“黑马”
+		<br>
+		Powered By
+		<a href="https://hexo.io" target="_blank">Hexo</a>
+		| Theme By
+		<a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a>	
+		| Hosted By
+		<a href="https://github.io" target="_blank">GitHub Page</a>
+		</div>			
+	 
+</footer>   
+
+  
+
+    <script src="/nayo.bundle.js"></script>           
+  </body>        
+</html>
